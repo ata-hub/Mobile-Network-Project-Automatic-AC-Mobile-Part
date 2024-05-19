@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/background_light"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,7 +14,9 @@
         android:layout_height="wrap_content"
         android:text="Room Temperature: --°C"
         android:textSize="24sp"
-        android:layout_margin="16dp" />
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:id="@+id/humidityTextView"
@@ -20,5 +24,29 @@
         android:layout_height="wrap_content"
         android:text="Room Humidity: --%"
         android:textSize="24sp"
-        android:layout_margin="16dp" />
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/coolingModeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activate Cooling Mode"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/heatingModeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activate Heating Mode"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 </LinearLayout>

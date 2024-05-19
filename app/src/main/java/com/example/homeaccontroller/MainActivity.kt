@@ -2,6 +2,8 @@ package com.example.homeaccontroller
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.homeaccontroller.R
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mqttAndroidClient: MqttAndroidClient
     private lateinit var temperatureTextView: TextView
     private lateinit var humidityTextView: TextView
+    private lateinit var coolingModeButton: Button
+    private lateinit var heatingModeButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,11 @@ class MainActivity : AppCompatActivity() {
 
         temperatureTextView = findViewById(R.id.temperatureTextView)
         humidityTextView = findViewById(R.id.humidityTextView)
+        coolingModeButton = findViewById(R.id.coolingModeButton)
+        heatingModeButton = findViewById(R.id.heatingModeButton)
+
+        coolingModeButton.visibility = View.GONE
+        heatingModeButton.visibility = View.GONE
 
         val clientId = MqttClient.generateClientId()
         mqttAndroidClient = MqttAndroidClient(this.applicationContext, "tcp://broker.hivemq.com:1883", clientId)
@@ -87,12 +96,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleTemperatureMessage(temperatureMessage: String) {
-        // Update UI with temperature reading
         temperatureTextView.text = "Room Temperature: $temperatureMessage°C"
+        val temperature = temperatureMessage.toDoubleOrNull()
+        temperature?.let {
+            if (it > 30) {
+                coolingModeButton.visibility = View.VISIBLE
+                heatingModeButton.visibility = View.GONE
+            } else if (it < 10) {
+                heatingModeButton.visibility = View.VISIBLE
+                coolingModeButton.visibility = View.GONE
+            } else {
+                coolingModeButton.visibility = View.GONE
+                heatingModeButton.visibility = View.GONE
+            }
+        }
     }
 
     private fun handleHumidityMessage(humidityMessage: String) {
-        // Update UI with humidity reading
         humidityTextView.text = "Room Humidity: $humidityMessage%"
     }
 }
