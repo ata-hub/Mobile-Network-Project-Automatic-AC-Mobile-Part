@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@android:color/background_light"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/temperatureTextView"
@@ -15,6 +16,8 @@
         android:text="Room Temperature: --°C"
         android:textSize="24sp"
         android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp" />
 
@@ -25,6 +28,8 @@
         android:text="Room Humidity: --%"
         android:textSize="24sp"
         android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp" />
 
